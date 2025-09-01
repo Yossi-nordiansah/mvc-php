@@ -21,6 +21,20 @@ class Mahasiswa_model
     {
         $this->db->query("SELECT * FROM mahasiswa WHERE id=:id");
         $this->db->bind("id", $id);
-        return $this->db->single();
+        return $this->db->single(); 
+    }
+
+    public function tambahDataMahasiswa($data){
+        $query = "INSERT INTO mahasiswa (nama, nim, prodi, fakultas) VALUES (:nama, :nim, :prodi, :fakultas)";
+
+        $this->db->query($query);
+        $this->db->bind('nama', $data["nama"]);
+        $this->db->bind('nim', $data["nim"]);
+        $this->db->bind('prodi', $data["prodi"]);
+        $this->db->bind('fakultas', $data["fakultas"]);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }
