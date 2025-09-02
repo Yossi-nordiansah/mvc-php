@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">
+            <button type="button" class="btn btn-primary tambahData" data-bs-toggle="modal" data-bs-target="#formModal">
                 Tambah Mahasiswa
             </button>
             <br>
@@ -19,8 +19,9 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <?= $mhs["nama"]; ?>
                         <div>
-                            <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs["id"]; ?>" class="badge text-bg-warning">Detail</a>
+                            <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs["id"]; ?>" class="badge text-bg-primary">Detail</a>
                             <a onclick="return alert('yakin?')" href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs["id"]; ?>" class="badge text-bg-danger">Hapus</a>
+                            <a class="badge cursor-pointer text-bg-success tampilModalUbah" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $mhs["id"]; ?>">Ubah</a>
                         </div>
                     </li>
                 <?php endforeach; ?>
@@ -29,14 +30,15 @@
     </div>
 </div>
 
-<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="judulModal">Tambah Mahasiswa</h1>
+                <h1 class="modal-title fs-5" id="judulModalLabel">Tambah Mahasiswa</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="<?= BASEURL; ?>/mahasiswa/tambah" method="post">
+                <input type="hidden" id="id" name="id">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>

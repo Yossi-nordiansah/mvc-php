@@ -21,10 +21,11 @@ class Mahasiswa_model
     {
         $this->db->query("SELECT * FROM mahasiswa WHERE id=:id");
         $this->db->bind("id", $id);
-        return $this->db->single(); 
+        return $this->db->single();
     }
 
-    public function tambahDataMahasiswa($data){
+    public function tambahDataMahasiswa($data)
+    {
         $query = "INSERT INTO mahasiswa (nama, nim, prodi, fakultas) VALUES (:nama, :nim, :prodi, :fakultas)";
 
         $this->db->query($query);
@@ -38,7 +39,8 @@ class Mahasiswa_model
         return $this->db->rowCount();
     }
 
-    public function hapusDataMahasiswa($id){
+    public function hapusDataMahasiswa($id)
+    {
 
         $query = "DELETE FROM mahasiswa WHERE id=:id";
         $this->db->query($query);
@@ -46,6 +48,21 @@ class Mahasiswa_model
         $this->db->execute();
 
         return $this->db->rowCount();
+    }
 
+    public function ubahDataMahasiswa($data)
+    {
+        $query = "UPDATE mahasiswa set nama=:nama, nim=:nim, prodi=:prodi, fakultas=:fakultas WHERE id=:id";
+
+        $this->db->query($query);
+        $this->db->bind('nama', $data["nama"]);
+        $this->db->bind('nim', $data["nim"]);
+        $this->db->bind('prodi', $data["prodi"]);
+        $this->db->bind('fakultas', $data["fakultas"]);
+        $this->db->bind('id', $data["id"]);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }
